@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+
+{% block pagecontent %}
+<div class="paper">
+    <div class="paper-head">
+        <!--我想在这里写一个学生信息查询的功能，但是有必要吗？
+        <form class="/action/student-info/search" method="get">
+            <label>学号:</label>
+            <input type="text" name="stu_no"/>
+            <label>姓名:</label>
+            <input type="text" name="stu_name"/>
+            <input type="submit" value="查询"/>
+        </form>-->
+    </div>
+    <div class="paper-body">
+        <table id="student-table" class="table">
+            <thead>
+                <tr>
+                    <th class="stu_no">学号</th>
+                    <th class="stu_name">姓名</th>
+                    <th class="stu_gender">性别</th>
+                    <th class="stu_enrolled">入学时间</th>
+                    <th class="stu_major">专业</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.stu_no }}</td>
+                    <td>{{ item.stu_name }}</td>
+                    <td>{{ item.stu_gender }}</td>
+                    <td>{{ item.stu_enrolled }}</td>
+                    <td>{{ item.stu_major }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

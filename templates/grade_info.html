@@ -1,0 +1,66 @@
+{% extends "main.html" %}
+
+{% block styles %}
+{% endblock %}
+{% block pagecontent %}
+<div class="paper">
+    <div class="paper-head">
+        <form action="/action/grade/add" method="POST">
+            <label>学号：</label>
+            <input type="text" name="stu_sno_gra"/>
+            <label>姓名：</label>
+            <input type="text" name="stu_sname_gra"/>
+            <label>课程号</label>
+            <input type="text" name="cou_cno_gra"/>
+            <label>课程名：</label>
+            <input type="text" name="cou_cname_gra"/>
+            <label>学分：</label>
+            <input type="text" name="cou_credit_gra"/>
+            <label>成绩</label>
+            <input type="text" name="grade"/>
+            <input type="submit" value="添加成绩"/>
+        </form>
+    </div>
+    <div class="paper-body">
+        <table id="grade-table" class="table"> 
+            <thead>
+                <tr>
+                    <th class="stu_sno_gra">学号</th>
+                    <th class="stu_sname_gra">姓名</th>
+                    <th class="cou_cno_gra">课程号</th>
+                    <th class="cou_cname_gra">课程名</th>
+                    <th class="cou_credit_gra">学分</th>
+                    <th class="grade">成绩</th>
+                    <th class="action">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.stu_sno_gra }}</td>
+                    <td>{{ item.stu_sname_gra }}</td>
+                    <td>{{ item.cou_cno_gra }}</td>
+                    <td>{{ item.cou_cname_gra }}</td>
+                    <td>{{ item.cou_credit_gra }}</td>
+                    <td>{{ item.grade }}</td>
+                    <td>
+                        <span>
+                            <a href="/grade/edit/{{item.stu_sno_gra}}/{{item.cou_cno_gra}}">
+                                修改
+                            </a>
+                        </span>
+                        <span>
+                            <form action="/action/grade/delete/{{item.stu_sno_gra}}/{{item.cou_cno_gra}}"
+                            method="post">
+                                <input type="submit" value="删除"/>
+                            </form>
+                        </span>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

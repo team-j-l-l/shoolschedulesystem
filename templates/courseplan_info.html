@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block styles %}
+{% endblock %}
+{% block pagecontent %}
+<div class="paper">
+    <div class="paper-head">课程计划</div>
+    <div class="paper-body">
+        <table id="courseplan-table" class="table">
+            <thead>
+                <tr>
+                    <th class="cou_cno">课程号</th>
+                    <th class="cou_cname">课程名</th>
+                    <th class="credit">学分</th>
+                    <th class="semester">学期</th>
+                    <th class="teacher">教师</th>
+                    <th class="time">上课时间</th>
+                    <th class="site">上课地点</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.cou_cno }}</td>
+                    <td>{{ item.cou_cname }}</td>
+                    <td>{{ item.credit }}</td>
+                    <td>{{ item.semester }}</td>
+                    <td>{{ item.teacher }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.site }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

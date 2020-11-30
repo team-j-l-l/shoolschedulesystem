@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>教务主页</title>
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        <div class="page">
+            <div class="page-head"></div>
+            <div class="page-body">
+                <div class="page-bar">
+                    <ul>
+                        <li><a href="/student_info">学生信息</a></li>
+                        <li><a href="/courseplan_info">学生选课</a></li>
+                        <li><a href="/grade_info">成绩信息</a></li>
+                    </ul>
+                </div>
+                <div class="page-content">{% block pagecontent %}{% endblock %}</div>
+            </div>
+            <div class="page-footer">&copy;j-l-l 2020</div>
+        </div>
+    </body>
+</html>
