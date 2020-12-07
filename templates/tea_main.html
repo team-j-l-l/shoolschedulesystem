@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+
+<!--  -->
+{% block styles %}
+<link href="/main.css" rel="stylesheet" />
+<link href="/components.css" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+<div class="page">
+    <div class="page-head"></div>
+    <div class="page-body">
+        <div class="page-bar">
+            <ul>
+                <li>
+                    <a href="/tcourseplan_info">课程计划</a>
+                </li>
+                <li>
+                    <a href="/student_info">学生信息</a>
+                </li>
+                <li>
+                    <a href="/grade_info">成绩查询</a>
+                </li>
+                <li>
+                    <a href="/grade_edit">成绩管理</a>
+                </li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <ul>
+                {% for items in items %}
+                <li>教师号： {{items.tno}}</li>
+                <br/>
+                <li>姓名：{{items.tname}}</li>
+                <br/>
+                <li>性别：{{items.tgender}}</li>
+                <br/>
+                <li>年龄：{{items.tage}}</li>
+                <br/>
+                <form class="change-code">
+                    <button>修改密码</button>
+                </form>
+                {% endfor %}
+            </ul>
+            <div class="password-editor">
+                <form class="dialog">
+                    <div class="dialog-head"></div>
+                    <div class="dialog-body">
+                        <label>新密码：</label>
+                        <input type="password" name="stu_code"/>
+                    </div>
+                    <div class="dialog-footer">
+                        <a id="save-btn" class="btn">保存</a>
+                        <a id="close-btn" class="btn">关闭</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">&copy;j-l-l 2020</div>
+</div>
+{% endblock %}

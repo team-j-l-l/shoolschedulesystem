@@ -1,66 +1,90 @@
-{% extends "main.html" %}
-
-{% block styles %}
-{% endblock %}
-{% block pagecontent %}
-<div class="paper">
-    <div class="paper-head">
-        <form action="/action/grade/add" method="POST">
-            <label>学号：</label>
-            <input type="text" name="stu_sno_gra"/>
-            <label>姓名：</label>
-            <input type="text" name="stu_sname_gra"/>
-            <label>课程号</label>
-            <input type="text" name="cou_cno_gra"/>
-            <label>课程名：</label>
-            <input type="text" name="cou_cname_gra"/>
-            <label>学分：</label>
-            <input type="text" name="cou_credit_gra"/>
-            <label>成绩</label>
-            <input type="text" name="grade"/>
-            <input type="submit" value="添加成绩"/>
-        </form>
-    </div>
-    <div class="paper-body">
-        <table id="grade-table" class="table"> 
-            <thead>
-                <tr>
-                    <th class="stu_sno_gra">学号</th>
-                    <th class="stu_sname_gra">姓名</th>
-                    <th class="cou_cno_gra">课程号</th>
-                    <th class="cou_cname_gra">课程名</th>
-                    <th class="cou_credit_gra">学分</th>
-                    <th class="grade">成绩</th>
-                    <th class="action">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.stu_sno_gra }}</td>
-                    <td>{{ item.stu_sname_gra }}</td>
-                    <td>{{ item.cou_cno_gra }}</td>
-                    <td>{{ item.cou_cname_gra }}</td>
-                    <td>{{ item.cou_credit_gra }}</td>
-                    <td>{{ item.grade }}</td>
-                    <td>
-                        <span>
-                            <a href="/grade/edit/{{item.stu_sno_gra}}/{{item.cou_cno_gra}}">
-                                修改
-                            </a>
-                        </span>
-                        <span>
-                            <form action="/action/grade/delete/{{item.stu_sno_gra}}/{{item.cou_cno_gra}}"
-                            method="post">
-                                <input type="submit" value="删除"/>
-                            </form>
-                        </span>
-                    </td>
-                </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-{% endblock %}
+<html>
+    <head></head>
+    <body>
+        <div class="paper">
+            <div class="paper-head">
+                <form class="grade-form" action="/action/grade/add" method="POST">
+                    <label>学号：</label>
+                    <select name="stu_sno">
+                        <option value="">--选择--</option>
+                        {% for stu in students %}
+                        <option value="{{stu.stu_sno}}">
+                            {{stu.stu_sname}}({{stu.stu_sno}})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label>课程号：</label>
+                    <select name="cou_cno">
+                        <option value="">--选择--</option>
+                        {% for cou in courses %}
+                        <option value="{{cou.cou_cno}}">
+                            {{cou.cou_cname}}({{cou.cou_cno}})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label>成绩</label>
+                    <input type="text" name="grade"/>
+                    <input type="submit" value="添加成绩"/>
+                </form>
+            </div>
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/tcourseplan_info">课程计划</a>
+                    </li>
+                    <li>
+                        <a href="/student_info">学生信息</a>
+                    </li>
+                    <li>
+                        <a href="/grade_info">成绩查询</a>
+                    </li>
+                    <li>
+                        <a href="/grade_edit">成绩管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-body">
+                <table id="grade-table" class="table"> 
+                    <thead>
+                        <tr>
+                            <th class="stu_sno">学号</th>
+                            <th class="stu_sname">姓名</th>
+                            <th class="cou_cno">课程号</th>
+                            <th class="cou_cname">课程名</th>
+                            <th class="cou_credit">课程学分</th>
+                            <th class="grade">成绩</th>
+                            <th class="action">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.stu_sno }}</td>
+                            <td>{{ item.stu_sname }}</td>
+                            <td>{{ item.cou_cno }}</td>
+                            <td>{{ item.cou_cname }}</td>
+                            <td>{{ item.cou_credit }}</td>
+                            <td>{{ item.grade }}</td>
+                            <td>
+                                <div class="ctrlbar">
+                                    <div class="btn">
+                                        <a href="/grade/edit/{{item.stu_sno}}/{{item.cou_cno}}">
+                                            修改
+                                        </a>
+                                    </div>
+                                    <div class="btn">
+                                        <a href="/grade/delete/{{item.stu_sno}}/{{item.cou_cno}}">
+                                            删除
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="paper-footer">&copy;j-l-l 2020</div>
+        </div>
+    </body>
+</html>

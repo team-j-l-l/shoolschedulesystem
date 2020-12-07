@@ -1,2 +1,4 @@
-SELECT * FROM student
-DELETE FROM grade
+SELECT * FROM teacher
+SELECT * FROM student 
+SELECT * FROM courseplan
+SELECT * FROM course

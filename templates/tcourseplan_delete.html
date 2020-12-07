@@ -1,0 +1,25 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="dialog">
+            <div class="content">
+                <span>
+                    确认删除“{{record.cou_cname}}”的课程计划“{{record.cou_semester}}”，“{{record.cou_week}}”，“{{record.cou_time}}”，“{{record.cou_site}}”?
+                </span>
+            </div>
+            <div class="footer">
+                <div class="btn">
+                    <form action="/action/tcourseplan/delete/{{record.cou_cno}}" 
+                    method="POST">
+                        <input type="submit" value="删除"/>
+                    </form>
+                </div>
+                <div class="btn">
+                    <a href="/tcourseplan_info">返回</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

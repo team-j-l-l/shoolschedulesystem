@@ -13,6 +13,8 @@ db_block = register_db_block(
 jinja_env = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(str(home_path/"templates"))
 )
-def render_html(template,**kwargs):
-    html = jinja_env.get_template(template).render(**kwargs)
-    return web.Response(text=html,content_type="text/html")
+def render_html(request,template,**kwargs):
+    location = {"pathname":request.path}
+    return web.Response(text=jinja_env.get_template(template).render(
+        location=location,**kwargs
+    ),content_type="text/html")

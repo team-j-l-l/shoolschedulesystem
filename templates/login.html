@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>login_page</title>
+        <style>
+            body{
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body background="background.jpg" style="background-repeat: no-repeat;background-size: 100% 100%;background-attachment: fixed;">
+        <div class="section-head"></div>
+        <div class="section-body">
+            <form action = "/action/login/" method="POST">
+            <label>用户名：</label>
+            <input type="text" name = "username" value="username"/>
+            <br/>
+            <label>密码：</label>
+            <input type="password"name = "password" value="password"/>
+            <br/>
+            <label>登陆类型：</label>
+                <input type="radio" name="logintype" value="教师">教师
+                <br/>
+                <input type="radio" name="logintype" value="学生">学生
+                <br/>
+            <input type="submit" value="登录"/>
+            </form>
+        </div>
+    </body>
+</html>

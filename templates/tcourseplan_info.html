@@ -1,0 +1,92 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="paper">
+            <div class="paper-header">
+                <form class="grade-form" action="action/tcourseplan/add" method="POST">
+                    <label>课程号：</label>
+                    <select name="cou_cno">
+                        <option value="">--选择</option>
+                        {% for cou in courses %}
+                        <option value="{{cou.cou_cno}}">
+                            {{cou.cou_cno}}{{cou.cou_cname}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label>学期：</label>
+                    <input type="text" name="semester"/>
+                    <label>周次：</label>
+                    <input type="text" name="week" />
+                    <label>时间：</label>
+                    <input type="text" name="time"/>
+                    <label>地点：</label>
+                    <input type="text" name="site"/>
+                    <input type="submit" value="添加课程计划"/>
+                </form>
+            </div>
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/tcourseplan_info">课程计划</a>
+                    </li>
+                    <li>
+                        <a href="/student_info">学生信息</a>
+                    </li>
+                    <li>
+                        <a href="/grade_info">成绩查询</a>
+                    </li>
+                    <li>
+                        <a href="/grade_edit">成绩管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-body">
+                <table id="courseplan-table" class="table">
+                    <thead>
+                        <tr>
+                            <th class="cou_cno">课程号</th>
+                            <th class="cou_cname">课程名</th>
+                            <th class="cou_credit">课程学分</th>
+                            <th class="cou_ctype">课程属性</th>
+                            <th class="cou_semester">学期</th>
+                            <th class="cou_time">时间</th>
+                            <th class="cou_week">周次</th>
+                            <th class="cou_site">地点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.cou_cno }}</td>
+                            <td>{{ item.cou_cname }}</td>
+                            <td>{{ item.cou_credit }}</td>
+                            <td>{{ item.cou_ctype }}</td>
+                            <td>{{ item.cou_semester }}</td>
+                            <td>{{ item.cou_time }}</td>
+                            <td>{{ item.cou_week }}</td>
+                            <td>{{ item.cou_site }}</td>
+                            <td>
+                                <div class="ctrlbar">
+                                    <div class="btn">
+                                        <a href="/tcourseplan/edit/{{item.cou_cno}}">
+                                            修改
+                                        </a>
+                                    </div>
+                                    <div class="btn">
+                                        <a href="/tcourseplan/delete/{{item.cou_cno}}">
+                                            删除
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="paper-footer">&copy;j-l-l 2020</div>
+        </div>
+    </body>
+</html>

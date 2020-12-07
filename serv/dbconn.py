@@ -36,4 +36,4 @@ class RecordCursor:
 		try:
 			return iter(self).__next__()
 		except StopIteration:
-			return None	
+			return None

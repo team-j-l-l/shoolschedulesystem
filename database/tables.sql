@@ -1,12 +1,14 @@
 -- 学生信息表
 DROP TABLE IF EXISTS student;
-CREATE TABLE IF NOT EXISTS student  (
+CREATE TABLE IF NOT EXISTS student(
     sn       INTEGER,     --序号
     sno       VARCHAR(10), --学号
     sname     TEXT,        --姓名
-    gender   CHAR(1),     --性别(F/M/O)
+    sgender   CHAR(1),     --性别(F/M/O)
+    sage      INTEGER,     --年龄
     enrolled DATE,        --入学时间
     major    TEXT,        --专业
+    scode    VARCHAR(10),  --学生登录密码
     PRIMARY KEY(sn)
 );
 -- 给序号sn创建一个自增序号seq_student_sn
@@ -20,10 +22,12 @@ CREATE UNIQUE INDEX idx_student_sno ON student(sno);
 
 -- 课程信息表
 DROP TABLE IF EXISTS course;
-CREATE TABLE IF NOT EXISTS course  (
+CREATE TABLE IF NOT EXISTS course(
     cn        INTEGER, --序号
     cno       VARCHAR(10), --课程号
     cname     TEXT,        --课程名称
+    credit    DECIMAL,      --课程学分
+    ctype     TEXT,       --课程属性
     PRIMARY KEY(cn)
 );
 -- 给序号cn创建一个自增序号seq_course_cn
@@ -35,45 +39,50 @@ ALTER TABLE course ALTER cn
 CREATE UNIQUE INDEX idx_course_cno ON course(cno);
 
 
+--教师信息表
+DROP TABLE IF EXISTS teacher;
+CREATE TABLE IF NOT EXISTS teacher(
+    tn       INTEGER, --序号
+    tno      VARCHAR(10), --教师号
+    tname    TEXT,       --教师姓名
+    tgender  CHAR(1),   --教师性别
+    tage     INTEGER,   --教师年龄
+    tcode    VARCHAR(10), --教师登录密码
+    PRIMARY KEY(tn)
+);
+--给序号tn创建一个自增序号seq_teacher_tn
+CREATE SEQUENCE seq_teacher_tn
+    START 10000 INCREMENT 1 OWNED BY teacher.tn;
+ALTER TABLE teacher ALTER tn
+    SET DEFAULT nextval('seq_teacher_tn');
+--给教师号tno创建一个唯一索引idx_teacher_tno
+CREATE UNIQUE INDEX idx_teacher_tno ON teacher(tno);
+
+
 -- 教学计划表
 DROP TABLE IF EXISTS courseplan;
-CREATE TABLE IF NOT EXISTS courseplan
-(
-    cou_cno   VARCHAR(10), -- 课程号
-    cou_cname TEXT, -- 课程名称
-    credit    DECIMAL, -- 学分
+CREATE TABLE IF NOT EXISTS courseplan(
+    pla_cno   VARCHAR(10), --计划课程号
     semester  TEXT, -- 学期
-    teacher   TEXT, -- 授课教师
-    week      TEXT, -- 教学周
+    week      TEXT, --教学周
     time      TEXT, -- 上课时间
     site      TEXT, -- 上课地点
     PRIMARY KEY(semester,time,site)
 );
+ALTER TABLE courseplan
+    ADD CONSTRAINT cno_pla_fk FOREIGN KEY (pla_cno) REFERENCES course(cno);
 
 
 -- 成绩信息表
-DROP TABLE IF EXISTS grade;
-CREATE TABLE IF NOT EXISTS grade
-(
-    stu_sno_gra VARCHAR(10), -- 学号
-    stu_sname_gra TEXT, -- 姓名
-    cou_cno_gra VARCHAR(10), -- 课程号
-    cou_cname_gra TEXT, -- 课程名称
-    cou_credit_gra DECIMAL, --学分
+DROP TABLE IF EXISTS gradetable;
+CREATE TABLE IF NOT EXISTS gradetable(
+    sno_gra VARCHAR(10), -- 学号
+    cno_gra VARCHAR(10), -- 课程号
     grade INTEGER, --成绩
-    PRIMARY KEY(stu_sno_gra,cou_cno_gra)
+    PRIMARY KEY(sno_gra,cno_gra)
 );
 -- 创建外键引用课程计划表的cno和学生表的sno
-ALTER TABLE grade 
-    ADD CONSTRAINT stu_sno_gra_fk FOREIGN KEY (stu_sno_gra) REFERENCES student(sno);
-ALTER TABLE grade 
-    ADD CONSTRAINT cou_cno_gra_fk FOREIGN KEY (cou_cno_gra) REFERENCES course(cno);
-ALTER TABLE grade ALTER COLUMN cou_credit_gra TYPE TEXT;
-
--- 登录信息表
-CREATE TABLE IF NOT EXISTS log_in  (
-    account    TEXT, 
-    passwords  TEXT,        
-    kind     CHAR(5),     
-    PRIMARY KEY(account)
-);
+ALTER TABLE gradetable 
+    ADD CONSTRAINT sno_gra_fk FOREIGN KEY (sno_gra) REFERENCES student(sno);
+ALTER TABLE gradetable 
+    ADD CONSTRAINT cno_gra_fk FOREIGN KEY (cno_gra) REFERENCES course(cno);

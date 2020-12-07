@@ -21,8 +21,8 @@ async def edit_grade_action(request):
 
 	with db_block() as db:
 		db.execute("""
-		UPDATE grade SET grade=%(grade)s
-		WHERE stu_sno_gra = %(stu_sno_gra)s AND cou_cno_gra = %(cou_cno_gra)s
+		UPDATE gradetable SET grade=%(grade)s
+		WHERE sno_gra = %(stu_sno_gra)s AND cno_gra = %(cou_cno_gra)s
 		""",dict(stu_sno_gra=stu_sno_gra,cou_cno_gra=cou_cno_gra,grade=grade))
 	return web.HTTPFound(location="/grade_info")
 
@@ -34,41 +34,39 @@ def delete_grade_action(request):
 		return web.HTTPBadRequest(text="stu_sno_gra,cou_cno_gra,must be required")
 	with db_block() as db:
 		db.execute("""
-		DELETE FROM grade
-			WHERE stu_sno_gra = %(stu_sno_gra)s AND cou_cno_gra = %(cou_cno_gra)s
+		DELETE FROM gradetable
+			WHERE sno_gra = %(stu_sno_gra)s AND cno_gra = %(cou_cno_gra)s
 		""",dict(stu_sno_gra=stu_sno_gra,cou_cno_gra=cou_cno_gra))
 		return web.HTTPFound(location="/grade_info")
 
 @web_routes.post('/action/grade/add')
 async def action_grade_add(request):
 	params = await request.post()
-	stu_sno_gra = params.get("stu_sno_gra")
-	stu_sname_gra = params.get("stu_sname_gra")
-	cou_cno_gra = params.get("cou_cno_gra")
-	cou_cname_gra = params.get("cou_cname_gra")
-	cou_credit_gra = params.get("cou_credit_gra")
+	stu_sno_gra = params.get("stu_sno")
+	cou_cno_gra = params.get("cou_cno")
 	grade = params.get("grade")
 
 	if stu_sno_gra is None or cou_cno_gra is None or grade is None:
 		return web.HTTPBadRequest(text="stu_sno_gra,cou_cno_gra,grade must be required")
 	try:
 		stu_sno_gra = int(stu_sno_gra)
-		stu_sname_gra = str(stu_sname_gra)
-		cou_cno_gra = int(cou_cno_gra)
-		cou_cname_gra = str(cou_cname_gra)
-		cou_credit_gra = float(cou_credit_gra)
+		cou_cno_gra = str(cou_cno_gra)
 		grade = float(grade)
 	except ValueError:
 		return web.HTTPBadRequest(text="invalid value")
 	try:
 		with db_block() as db:
 			db.execute("""
-			INSERT INTO grade(stu_sno_gra,stu_sname_gra,cou_cno_gra,cou_cname_gra,cou_credit_gra,grade)
-			VALUES(%(stu_sno_gra)s,%(stu_sname_gra)s,%(cou_cno_gra)s,%(cou_cname_gra)s,%(cou_credit_gra)s,%(grade)s)
-			""",dict(stu_sno_gra=stu_sno_gra,stu_sname_gra=stu_sname_gra,cou_cno_gra=cou_cno_gra,cou_cname_gra=cou_cname_gra,cou_credit_gra=cou_credit_gra,grade=grade)
+			INSERT INTO gradetable(sno_gra,cno_gra,grade)
+			VALUES(%(stu_sno_gra)s,%(cou_cno_gra)s,%(grade)s)
+			""",dict(stu_sno_gra=stu_sno_gra,cou_cno_gra=cou_cno_gra,grade=grade)
 			)
 	except psycopg2.errors.UniqueViolation:
-		return web.HTTPBadRequest(text="已经添加该学生成绩")
+		query = urlencode({
+			"message":"已经添加该学生的该课程成绩",
+			"return":"/grade"
+		})
+		return web.HTTPFound(location=f"/error?{query}")
 	except psycopg2.errors.ForeignKeyViolation as ex:
 		return web.HTTPBadRequest(text=f"无此学生或课程：{ex}")
 	return web.HTTPFound(location='/grade_info')
