@@ -3,6 +3,7 @@
 <!--  -->
 {% block styles %}
 <link href="/main.css" rel="stylesheet" />
+<link href="/tea_main.css" rel="stylesheet" />
 <link href="/components.css" rel="stylesheet" />
 {% endblock %}
 
@@ -37,10 +38,6 @@
                 <br/>
                 <li>年龄：{{items.tage}}</li>
                 <br/>
-                <form class="change-code">
-                    <button>修改密码</button>
-                </form>
-                {% endfor %}
             </ul>
             <div class="password-editor">
                 <form class="dialog">
@@ -48,7 +45,11 @@
                     <div class="dialog-body">
                         <label>新密码：</label>
                         <input type="password" name="stu_code"/>
-                    </div>
+                    <form class="change-code">
+                        <button>修改密码</button>
+                    </form>
+                    {% endfor %}
+                </div>
                     <div class="dialog-footer">
                         <a id="save-btn" class="btn">保存</a>
                         <a id="close-btn" class="btn">关闭</a>

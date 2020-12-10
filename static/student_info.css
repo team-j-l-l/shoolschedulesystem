@@ -9,8 +9,18 @@ td.col-stu_name, td.col-stu_no, td.col-gender, td.col-enrolled {
     text-align: center;
 }
 
+.table tr{
+    min-width: 4em;
+    width: 8em;
+    text-align: center;
+}
+
 .paper-head {
     margin-bottom: 1em;
+}
+
+.page-bar > ul > li, a:link{
+    text-decoration: none;
 }
 
 .paper-body > table {
@@ -32,9 +42,6 @@ td.ctrlbar .btn {
 }
 
 .dialog-background {
-    /* position: absolute;
-    width: 100%;
-    height: 100%; */
     position: fixed;
     top: 0;
     bottom: 0;
@@ -133,10 +140,6 @@ td.ctrlbar .btn {
 .dialog-footer > .btn:last-child {
     margin-right: 1em;
 }
-
-/* .dialog-background.comfirmation-dialog {
-    visibility: visible;
-} */
 
 .comfirmation-dialog > .dialog {
     min-width: 25em;

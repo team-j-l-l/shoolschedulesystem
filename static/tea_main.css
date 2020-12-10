@@ -1,0 +1,32 @@
+.page-bar > ul{
+    padding: 20px;
+    font-size: 16px;
+}
+
+.page-bar > ul > li,a:link{
+    display: flex;
+    text-decoration: none;
+    line-height: 35px;
+    text-align: left;
+}
+
+.page-content > ul > li {
+    display: flex;
+    line-height: 35px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.dialog-body{
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+
+.dialog-footer{
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+#close-btn{
+    margin-left: 20px;
+}

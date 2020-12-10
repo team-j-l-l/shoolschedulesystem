@@ -1,6 +1,7 @@
 <html>
     <head>
-
+        <link href="/tcourseplan_info.css" rel="stylesheet" />
+        <link href="/components.css" rel="stylesheet" />
     </head>
     <body>
         <div class="paper">
@@ -54,6 +55,7 @@
                             <th class="cou_time">时间</th>
                             <th class="cou_week">周次</th>
                             <th class="cou_site">地点</th>
+                            <th class="action">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,13 +71,10 @@
                             <td>{{ item.cou_site }}</td>
                             <td>
                                 <div class="ctrlbar">
-                                    <div class="btn">
-                                        <a href="/tcourseplan/edit/{{item.cou_cno}}">
+                                        <a href="/tcourseplan/edit/{{item.cou_cno}}" class="btn">
                                             修改
                                         </a>
-                                    </div>
-                                    <div class="btn">
-                                        <a href="/tcourseplan/delete/{{item.cou_cno}}">
+                                        <a href="/tcourseplan/delete/{{item.cou_cno}}" class="btn">
                                             删除
                                         </a>
                                     </div>

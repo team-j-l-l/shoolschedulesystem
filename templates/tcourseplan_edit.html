@@ -1,16 +1,23 @@
 <html>
     <head>
         <title>修改课程计划</title>
+        <link href="/tcourseplan_edit.css" rel="stylesheet" />
     </head>
     <body>
+        <div class="form">
         <form action="/action/tcourseplan/edit/{{cou_cno}}" method="POST">
             学期：<input type="text" name="semester" value="{{semester}}">
+            <br>
             周次：<input type="text" name="week" value="{{week}}">
+            <br>
             时间：<input type="text" name="time" value="{{time}}">
+            <br>
             地点：<input type="text" name="site" value="{{site}}">
+            <br>
             <input type="submit" value="修改">
             <hr>
             <a href="/tcourseplan_info">回到课程计划表</a>
         </form>
+    </div>
     </body>
 </html>

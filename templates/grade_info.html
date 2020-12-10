@@ -1,5 +1,8 @@
 <html>
-    <head></head>
+    <head>
+        <link href="/grade_info.css" rel="stylesheet" />
+        <link href="/components.css" rel="stylesheet" />
+    </head>
     <body>
         <div class="paper">
             <div class="paper-head">
@@ -67,15 +70,10 @@
                             <td>{{ item.grade }}</td>
                             <td>
                                 <div class="ctrlbar">
-                                    <div class="btn">
-                                        <a href="/grade/edit/{{item.stu_sno}}/{{item.cou_cno}}">
+                                        <a href="/grade/edit/{{item.stu_sno}}/{{item.cou_cno}}" class="btn"> 
                                             修改
                                         </a>
-                                    </div>
-                                    <div class="btn">
-                                        <a href="/grade/delete/{{item.stu_sno}}/{{item.cou_cno}}">
-                                            删除
-                                        </a>
+                                        <a href="/grade/delete/{{item.stu_sno}}/{{item.cou_cno}}"class="btn">删除</a>
                                     </div>
                                 </div>
                             </td>

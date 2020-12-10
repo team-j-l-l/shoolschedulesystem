@@ -97,3 +97,8 @@ table.table {
 .table tr:nth-child(even) {
     background-color: hsl(306 40% 90%);
 }
+
+.page-footer{
+    width: 100%;
+    text-align: center;
+}

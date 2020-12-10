@@ -1,8 +1,10 @@
 {% extends "main.html" %}
 
 {% block styles %}
+<link href="main.css" rel="stylesheet" />
+<link href="stu_mains.css" rel="stylesheet" />
+<link href="/components.css" rel="stylesheet" />
 {% endblock %}
-
 
 {% block page %}
 <div class="page">
@@ -11,10 +13,10 @@
         <div class="page-bar">
             <ul>
                 <li>
-                    <a href="/courseplan_info">课程计划</a>
+                    <a href="/courseplan_info" target="_blank">课程计划</a>
                 </li>
                 <li>
-                    <a href="/stu_gra_info">成绩查询</a>
+                    <a href="/grade_info" target="_blank">成绩查询</a>
                 </li>
             </ul>
         </div>
@@ -33,10 +35,6 @@
                 <br/>
                 <li>专业：{{items.major}}</li>
                 <br/>
-                <form class="change-code">
-                    <button>修改密码</button>
-                </form>
-                {% endfor %}
             </ul>
             <div class="password-editor">
                 <form class="dialog">
@@ -44,6 +42,11 @@
                     <div class="dialog-body">
                         <label>新密码：</label>
                         <input type="password" name="stu_code"/>
+                    
+                    <form class="change-code">
+                    <button>修改密码</button>
+                    </form>
+                    {% endfor %}
                     </div>
                     <div class="dialog-footer">
                         <a id="save-btn" class="btn">保存</a>

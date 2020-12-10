@@ -1,0 +1,59 @@
+body{
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+}
+
+.background{
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    background-size: 100% 100%;
+    position: relative;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.section-body{
+    height: 512px;
+    text-align: left;
+    font-family: 华文新魏;
+    font-size: 35px;
+    margin-left: 150px;
+    margin-top: 50px;
+}
+
+.POST{
+    text-align: left;
+}
+
+input[type="username"]{
+    margin: 10px;
+    padding: 3px;
+    width: 250px; 
+}
+
+input[type="password"]{
+    margin: 10px;
+    margin-left: 45px;
+    padding: 3px;
+    width: 250px;
+}
+
+.login-type{
+    margin-top: 10px;
+}
+
+input#radio2{
+    margin-left: 189px;
+    margin-top: 5px;
+}
+
+input[type="submit"]{
+    width: 80px;
+    height: 35px;
+    font-family: 华文新魏;
+    font-size: 24px;
+    margin-left: 200px;
+    margin-top: 20px;
+}
