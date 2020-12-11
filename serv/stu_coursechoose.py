@@ -1,7 +1,10 @@
 from aiohttp import web
+import psycopg2.errors
+from urllib.parse import urlencode
 from .config import db_block, web_routes, render_html
+from .login_actions import get_username
 
-@web_routes.get("/tcourseplan_info")
+@web_routes.get("/stu_planchoose")
 async def view_list_courseplan(request):
     with db_block() as db:
         db.execute("""
@@ -16,23 +19,10 @@ async def view_list_courseplan(request):
         INNER JOIN course as c ON p.pla_cno=c.cno ORDER BY pla_cno;
         """)
         items = list(db)
-    return render_html(request,"tcourseplan_info.html",courses = courses,items = items)
+    return render_html(request,"stu_coursechoose.html",courses = courses,items = items)
 
-@web_routes.get("/tcourseplan/edit/{cou_cno}")
-def view_courseplan_editor(request):
-    cou_cno = request.match_info.get("cou_cno")
-    with db_block() as db:
-        db.execute("""
-            SELECT semester,week,time,site FROM courseplan 
-            WHERE pla_cno = %(cou_cno)s; 
-        """,dict(cou_cno=cou_cno))
-        record = db.fetch_first()
-    if record is None:
-        return web.HTTPNotFound(text=f"no such course:cou_cno={cou_cno}")
-    return render_html(request,"tcourseplan_edit.html",cou_cno=cou_cno,semester = record.semester,week=record.week,time=record.time,site=record.site) 
-
-@web_routes.get("/tcourseplan/delete/{cou_cno}")
-def courseplan_deletion_dialog(request):
+@web_routes.get("/scourse/choose/{cou_cno}")
+def choose_confirm_dialog(request):
     cou_cno = request.match_info.get("cou_cno")
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno must be required")
@@ -46,6 +36,26 @@ def courseplan_deletion_dialog(request):
         WHERE pla_cno = %(cou_cno)s;
         """,dict(cou_cno=cou_cno))
         record = db.fetch_first()
+        print(record)
     if record is None:
         return web.HTTPNotFound(text=f"no such course：cou_cno={cou_cno}")
-    return render_html(request,"tcourseplan_delete.html",record=record)
+    return render_html(request,"stu_coursechoose_confirm.html",record=record)
+
+@web_routes.post('/action/stu_planchoose/confirm/{cou_cno}/{semester}/{week}/{time}/{site}')
+def confirm_courseplan_action(request):
+    cou_cno = request.match_info.get("cou_cno")
+    semester = request.match_info.get("semester")
+    print(semester)
+    site = request.match_info.get("site")
+    print(site)
+    week = request.match_info.get("week")
+    time = request.match_info.get("time")
+    username = get_username()
+    if cou_cno is None:
+        return web.HTTPBadRequest(text="cou_cno,must be required")
+    with db_block() as db:
+        db.execute("""
+        INSERT INTO studentcourse(sno_cou,cno_cou,semester_cou,week,time,site) 
+        VALUES(%(username)s,%(cou_cno)s,%(semester)s,%(week)s,%(time)s,%(site)s)""",
+        dict(username=username,cou_cno=cou_cno,semester=semester,week=week,time=time,site=site))
+    return web.HTTPFound(location="/stu_planchoose")

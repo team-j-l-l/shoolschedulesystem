@@ -1,0 +1,34 @@
+<html>
+    <head>
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        <div class="paper">
+            <div class="paper-head">
+                {% block paperheader %}{% endblock %}
+            </div>
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/tcourseplan_info">课程计划</a>
+                    </li>
+                    <li>
+                        <a href="/student_info">学生信息</a>
+                    </li>
+                    <li>
+                        <a href="/grademanage_info">成绩管理</a>
+                    </li>
+                    <li>
+                        <a href="/tea_main">个人主页</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-body">
+                {% block paperbody %}{% endblock %}
+            </div>
+            <div class="paper-footer">
+                &copy;j-l-l 2020                
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,43 +1,24 @@
-<html>
-    <head>
+{% extends "stu_base.html" %}
 
-    </head>
-    <body>
-        <div class="paper">
-            <div class="paper-head"></div>
-            <div class="paper-bar">
-                <ul>
-                    <li>
-                        <a href="/courseplan_info">课程计划</a>
-                    </li>
-                    <li>
-                        <a href="/stu_gra_info">成绩查询</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="paper-body">
-                <table>
-                    <tr>
-                        <th>课程号</th>
-                        <th>课程名</th>
-                        <th>学分</th>
-                        <th>课程属性</th>
-                        <th>成绩</th>
-                    </tr>
-                    {% for item in items %}
-                    <tr>
-                        <td>{{ item.cno_gra }}</td>
-                        <td>{{ item.cname }}</td>
-                        <td>{{ item.credit }}</td>
-                        <td>{{ item.ctype }}</td>
-                        <td>{{ item.grade }}</td>
-                    {% endfor %}
-                    </tr>
-                </table>
-            </div>
-            <div class="paper-footer">
-                &copy;j-l-l 2020
-            </div>
-        </div>
-    </body>
-</html>
+{% block styles %}{% endblock %}
+
+{% block paperbody %}
+<table>
+    <tr>
+        <th>课程号</th>
+        <th>课程名</th>
+        <th>学分</th>
+        <th>课程属性</th>
+        <th>成绩</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.cno_cou }}</td>
+        <td>{{ item.cname }}</td>
+        <td>{{ item.credit }}</td>
+        <td>{{ item.ctype }}</td>
+        <td>{{ item.grade }}</td>
+    {% endfor %}
+    </tr>
+</table>
+{% endblock %}

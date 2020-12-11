@@ -8,13 +8,13 @@ async def view_stu_gra_info(request):
     print(username)
     with db_block() as db:
         db.execute("""
-        SELECT g.sno_gra, g.cno_gra, g.grade, c.cno, c.cname, c.credit,
-        c.ctype FROM gradetable as g
-        INNER JOIN course as c ON g.cno_gra = c.cno
-        ORDER BY cno_gra;
+        SELECT g.sno_cou, g.cno_cou, g.grade, c.cno, c.cname, c.credit,
+        c.ctype FROM studentcourse as g
+        INNER JOIN course as c ON g.cno_cou = c.cno
+        ORDER BY cno_cou;
         """)
         items = list(db)
         for item in items: 
-            if item.sno_gra != username:
+            if item.sno_cou != username:
                 items.remove(item)
     return render_html(request,"stu_gra_info.html",items=items)

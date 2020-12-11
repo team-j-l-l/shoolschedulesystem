@@ -1,61 +1,29 @@
-{% extends "main.html" %}
+{% extends "stu_base.html" %}
 
-{% block styles %}
-<link href="main.css" rel="stylesheet" />
-<link href="stu_mains.css" rel="stylesheet" />
-<link href="/components.css" rel="stylesheet" />
+{% block styles %}{% endblock %}
+
+{% block paperheader %}
+<a href="/login">退出登录</a>
 {% endblock %}
 
-{% block page %}
-<div class="page">
-    <div class="page-head"></div>
-    <div class="page-body">
-        <div class="page-bar">
-            <ul>
-                <li>
-                    <a href="/courseplan_info" target="_blank">课程计划</a>
-                </li>
-                <li>
-                    <a href="/grade_info" target="_blank">成绩查询</a>
-                </li>
-            </ul>
-        </div>
-        <div class="page-content">
-            <ul>
-                {% for items in items %}
-                <li>学号： {{items.sno}}</li>
-                <br/>
-                <li>姓名：{{items.sname}}</li>
-                <br/>
-                <li>性别：{{items.sgender}}</li>
-                <br/>
-                <li>年龄：{{items.sage}}</li>
-                <br/>
-                <li>入学日期：{{items.enrolled}}</li>
-                <br/>
-                <li>专业：{{items.major}}</li>
-                <br/>
-            </ul>
-            <div class="password-editor">
-                <form class="dialog">
-                    <div class="dialog-head"></div>
-                    <div class="dialog-body">
-                        <label>新密码：</label>
-                        <input type="password" name="stu_code"/>
-                    
-                    <form class="change-code">
-                    <button>修改密码</button>
-                    </form>
-                    {% endfor %}
-                    </div>
-                    <div class="dialog-footer">
-                        <a id="save-btn" class="btn">保存</a>
-                        <a id="close-btn" class="btn">关闭</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="page-footer">&copy;j-l-l 2020</div>
-</div>
+{% block paperbody %}
+<ul>
+    {% for items in items %}
+    <li>学号： {{items.sno}}</li>
+    <br/>
+    <li>姓名：{{items.sname}}</li>
+    <br/>
+    <li>性别：{{items.sgender}}</li>
+    <br/>
+    <li>年龄：{{items.sage}}</li>
+    <br/>
+    <li>入学日期：{{items.enrolled}}</li>
+    <br/>
+    <li>专业：{{items.major}}</li>
+    <br/>
+    <a href="/passwordchange/student">
+        修改密码
+    </a>
+    {% endfor %}
+</ul>
 {% endblock %}

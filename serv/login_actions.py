@@ -23,7 +23,7 @@ async def login_student_action(request):
             if username1 == username:
                 password1 = items.scode
                 if password == password1:
-                    return web.HTTPFound(location="/stu_main_view")
+                    return web.HTTPFound(location="/stu_main")
     if usertype == "教师":
         with db_block() as db:
             db.execute("""
@@ -35,7 +35,7 @@ async def login_student_action(request):
             if username1 == username:
                 password1 = items.tcode
                 if password == password1:
-                    return web.HTTPFound(location="/tea_main_view")
+                    return web.HTTPFound(location="/tea_main")
 
 
 def get_username():

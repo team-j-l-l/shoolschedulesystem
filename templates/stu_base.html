@@ -1,0 +1,34 @@
+<html>
+    <head>
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        <div class="paper">
+            <div class="paper-head">
+                {% block paperheader %}{% endblock %}
+            </div>
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/stu_planchoose">选择课程</a>
+                    </li>
+                    <li>
+                        <a href="/stu_mycourse">我的课程</a>
+                    </li>
+                    <li>
+                        <a href="/stu_gra_info">成绩查询</a>
+                    </li>
+                    <li>
+                        <a href="/stu_main">个人主页</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-body">
+                {% block paperbody %}{% endblock %}
+            </div>
+            <div class="paper-footer">
+                &copy;j-l-l 2020                
+            </div>
+        </div>
+    </body>
+</html>

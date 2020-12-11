@@ -1,0 +1,47 @@
+{% extends "tea_base.html" %}
+
+{% block paperheader %}
+<a href="/grademanage_info">返回</a>
+
+{% endblock %}
+{% block paperbody %}
+<table id="grade-table" class="table"> 
+    <thead>
+        <tr>
+            <th class="stu_sno">学号</th>
+            <th class="stu_sname">姓名</th>
+            <th class="cou_cno">课程号</th>
+            <th class="cou_cname">课程名</th>
+            <th class="cou_credit">课程学分</th>
+            <th class="grade">成绩</th>
+            <th class="action">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.stu_sno }}</td>
+            <td>{{ item.stu_sname }}</td>
+            <td>{{ item.cou_cno }}</td>
+            <td>{{ item.cou_cname }}</td>
+            <td>{{ item.cou_credit }}</td>
+            <td>{{ item.grade }}</td>
+            <td>
+                <div class="ctrlbar">
+                    <div class="btn">
+                        <a href="/grade/edit/{{item.stu_sno}}/{{item.cou_cno}}">
+                            修改
+                        </a>
+                    </div>
+                    <div class="btn">
+                        <a href="/grade/delete/{{item.stu_sno}}/{{item.cou_cno}}">
+                            删除
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -29,20 +29,17 @@ async def edit_courseplan_action(request):
         """,dict(semester=semester,week=week,time=time,site=site,cou_cno=cou_cno))
     return web.HTTPFound(location="/tcourseplan_info")
 
-@web_routes.post('/action/tcourseplan/delete/{cou_cno}')
+@web_routes.post('/action/tcourseplan/delete/{cou_cno}/{semester}/{site}')
 def delete_courseplan_action(request):
     cou_cno = request.match_info.get("cou_cno")
-    semester = request.match_info.get("cou_semester")
-    week = request.match_info.get("cou_week")
-    time = request.match_info.get("cou_time")
-    site = request.match_info.get("cou_site")
+    semester = request.match_info.get("semester")
+    site = request.match_info.get("site")
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno,must be required")
     with db_block() as db:
         db.execute("""
-        DELETE FROM courseplan
-            WHERE pla_cno = %(cou_cno)s AND semester = %(semester)s AND week = %(week)s AND time = %(time)s AND site = %(site)s
-        """,dict(cou_cno=cou_cno,semester=semester,week=week,time=time,site=site))
+        DELETE FROM courseplan WHERE pla_cno=%(cou_cno)s AND semester = %(semester)s AND site = %(site)s
+        """,dict(cou_cno=cou_cno,semester=semester,site=site))
     return web.HTTPFound(location="/tcourseplan_info")
 
 @web_routes.post('/action/tcourseplan/add')

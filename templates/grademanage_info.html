@@ -1,0 +1,19 @@
+{% extends "tea_base.html" %}
+
+{% block paperheader %}
+<form action="/action/grademanage/course/" method="POST">
+    <label>课程号：</label>
+    <select name="cou_cno">
+        <option value="">--选择--</option>
+        {% for cou in courses %}
+        <option value="{{cou.cou_cno}}">
+            {{cou.cou_cname}}({{cou.cou_cno}})
+        </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="确认"/>
+</form>
+
+{% endblock %}
+
+

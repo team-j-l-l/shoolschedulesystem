@@ -16,6 +16,8 @@ CREATE SEQUENCE seq_student_sn
     START 10000 INCREMENT 1 OWNED BY student.sn;
 ALTER TABLE student ALTER sn 
     SET DEFAULT nextval('seq_student_sn');
+ALTER TABLE student ALTER scode
+    SET DEFAULT ('000000');
 -- 给学号sno创建一个唯一索引idx_student_sno
 CREATE UNIQUE INDEX idx_student_sno ON student(sno);
 
@@ -67,22 +69,39 @@ CREATE TABLE IF NOT EXISTS courseplan(
     week      TEXT, --教学周
     time      TEXT, -- 上课时间
     site      TEXT, -- 上课地点
-    PRIMARY KEY(semester,time,site)
+    PRIMARY KEY(pla_cno,semester,site)
 );
 ALTER TABLE courseplan
     ADD CONSTRAINT cno_pla_fk FOREIGN KEY (pla_cno) REFERENCES course(cno);
 
 
--- 成绩信息表
-DROP TABLE IF EXISTS gradetable;
-CREATE TABLE IF NOT EXISTS gradetable(
-    sno_gra VARCHAR(10), -- 学号
-    cno_gra VARCHAR(10), -- 课程号
-    grade INTEGER, --成绩
-    PRIMARY KEY(sno_gra,cno_gra)
-);
--- 创建外键引用课程计划表的cno和学生表的sno
-ALTER TABLE gradetable 
-    ADD CONSTRAINT sno_gra_fk FOREIGN KEY (sno_gra) REFERENCES student(sno);
-ALTER TABLE gradetable 
-    ADD CONSTRAINT cno_gra_fk FOREIGN KEY (cno_gra) REFERENCES course(cno);
+--学生课程表
+DROP TABLE IF EXISTS studentcourse;
+CREATE TABLE IF NOT EXISTS studentcourse(
+    sno_cou VARCHAR(10), --学生学号
+    cno_cou VARCHAR(10), --课程号
+    semester_cou TEXT, --上课学期
+    week TEXT, --周次
+    time TEXT, --时间
+    site TEXT, --上课地点
+    grade INTEGER DEFAULT null, --课程成绩
+    PRIMARY KEY(sno_cou,cno_cou)
+)
+ALTER TABLE studentcourse
+    ADD CONSTRAINT sno_cou_fk FOREIGN KEY (sno_cou) REFERENCES student(sno);
+ALTER TABLE studentcourse
+    ADD CONSTRAINT cno_cou_fk FOREIGN KEY (cno_cou) REFERENCES course(cno);
+
+---- 成绩信息表
+--DROP TABLE IF EXISTS gradetable;
+--CREATE TABLE IF NOT EXISTS gradetable(
+--    sno_gra VARCHAR(10), -- 学号
+--    cno_gra VARCHAR(10), -- 课程号
+--    grade INTEGER, --成绩
+--    PRIMARY KEY(sno_gra,cno_gra)
+--);
+---- 创建外键引用课程计划表的cno和学生表的sno
+--ALTER TABLE gradetable 
+--    ADD CONSTRAINT sno_gra_fk FOREIGN KEY (sno_gra) REFERENCES student(sno);
+--ALTER TABLE gradetable 
+--    ADD CONSTRAINT cno_gra_fk FOREIGN KEY (cno_gra) REFERENCES course(cno);

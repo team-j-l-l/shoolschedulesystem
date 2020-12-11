@@ -1,0 +1,43 @@
+{% extends "stu_base.html" %}
+
+{% block styles %}{% endblock %}
+
+{% block paperbody %}
+<table id="mycourse-table" class="table">
+    <thead>
+        <tr>
+            <th class="cou_cno">课程号</th>
+            <th class="cou_cname">课程名</th>
+            <th class="cou_credit">课程学分</th>
+            <th class="cou_ctype">课程属性</th>
+            <th class="cou_semester">学期</th>
+            <th class="cou_time">时间</th>
+            <th class="cou_week">周次</th>
+            <th class="cou_site">地点</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.cou_cno }}</td>
+            <td>{{ item.cou_cname }}</td>
+            <td>{{ item.cou_credit }}</td>
+            <td>{{ item.cou_ctype }}</td>
+            <td>{{ item.cou_semester }}</td>
+            <td>{{ item.cou_time }}</td>
+            <td>{{ item.cou_week }}</td>
+            <td>{{ item.cou_site }}</td>
+        </tr>
+        <td>
+            <div class="ctrlbar">
+                <div class="btn">
+                    <a href="/action/stu_mycourse/delete/{{item.cou_cno}}">
+                        删除
+                    </a>
+                </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

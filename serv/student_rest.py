@@ -64,6 +64,12 @@ async def delete_student(request):
     stu_sn = request.match_info.get("stu_sn")
     with db_block() as db:
         db.execute("""
+        SELECT sno FROM student WHERE sn = %(stu_sn)s; 
+        """,dict(stu_sn=stu_sn))
+        stu_sno = db.fetch_first().sno
+    with db_block() as db:
+        db.execute("""
+        DELETE FROM studentcourse WHERE sno_cou=%(stu_sno)s;
         DELETE FROM student WHERE sn=%(stu_sn)s;
-        """, dict(stu_sn=stu_sn))
+        """, dict(stu_sn=stu_sn,stu_sno=stu_sno))
     return web.Response(text="", content_type="text/plain")

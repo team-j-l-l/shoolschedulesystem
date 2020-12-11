@@ -10,6 +10,10 @@ import serv.grade_actions
 import serv.stu_gra_view
 import serv.tcourseplan_view
 import serv.tcourseplan_actions
+import serv.mainpage_view
+import serv.stu_coursechoose
+import serv.stu_mycourse
+import serv.password
 
 
 

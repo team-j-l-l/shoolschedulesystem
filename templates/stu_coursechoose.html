@@ -1,29 +1,6 @@
-{% extends "tea_base.html" %}
+{% extends "stu_base.html" %}
 
 {% block styles %}{% endblock %}
-
-{% block paperheader %}
-<form class="grade-form" action="action/tcourseplan/add" method="POST">
-    <label>课程号：</label>
-    <select name="cou_cno">
-        <option value="">--选择</option>
-        {% for cou in courses %}
-        <option value="{{cou.cou_cno}}">
-            {{cou.cou_cno}}{{cou.cou_cname}}
-        </option>
-        {% endfor %}
-    </select>
-    <label>学期：</label>
-    <input type="text" name="semester"/>
-    <label>周次：</label>
-    <input type="text" name="week" />
-    <label>时间：</label>
-    <input type="text" name="time"/>
-    <label>地点：</label>
-    <input type="text" name="site"/>
-    <input type="submit" value="添加课程计划"/>
-</form>
-{% endblock %}
 
 {% block paperbody %}
 <table id="courseplan-table" class="table">
@@ -53,13 +30,8 @@
             <td>
                 <div class="ctrlbar">
                     <div class="btn">
-                        <a href="/tcourseplan/edit/{{item.cou_cno}}">
-                            修改
-                        </a>
-                    </div>
-                    <div class="btn">
-                        <a href="/tcourseplan/delete/{{item.cou_cno}}">
-                            删除
+                        <a href="/scourse/choose/{{item.cou_cno}}">
+                            选择
                         </a>
                     </div>
                 </div>
@@ -69,4 +41,3 @@
     </tbody>
 </table>
 {% endblock %}
-<html>
