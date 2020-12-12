@@ -1,8 +1,10 @@
 {% extends "tea_base.html" %}
 
-{% block styles %}{% endblock %}
+{% block styles %}
+<link href="/tcourseplan_info.css" rel="stylesheet" />
+{% endblock %}
 
-{% block paperheader %}
+{% block paper_content %}
 <form class="grade-form" action="action/tcourseplan/add" method="POST">
     <label>课程号：</label>
     <select name="cou_cno">
@@ -37,6 +39,7 @@
             <th class="cou_time">时间</th>
             <th class="cou_week">周次</th>
             <th class="cou_site">地点</th>
+            <th class="acction">操作</th>
         </tr>
     </thead>
     <tbody>

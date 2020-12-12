@@ -1,9 +1,11 @@
 {% extends "stu_base.html" %}
 
-{% block styles %}{% endblock %}
+{% block styles %}
+{% endblock %}
 
 {% block paperbody %}
-<table>
+<table class="table">
+    <thead>
     <tr>
         <th>课程号</th>
         <th>课程名</th>
@@ -11,6 +13,7 @@
         <th>课程属性</th>
         <th>成绩</th>
     </tr>
+</thead>
     {% for item in items %}
     <tr>
         <td>{{ item.cno_cou }}</td>

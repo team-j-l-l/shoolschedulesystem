@@ -1,97 +1,107 @@
 <html>
+    <head>
+        <!-- <link rel="stylesheet" href="/bases.css"> -->
+       <link rel="stylesheet" href="/student_info.css">
+        <script>
+            function checkActive(el) {
+                console.log(1111, el.href);
+                return document.location.pathname.startsWith(el.href);
+            }
+        </script>
+    </head>
 
-<head>
-    <link href="/student_info.css" rel="stylesheet" />
-    <link href="/components.css" rel="stylesheet" />
-</head>
-
-<body>
-    <div class="paper">
-        <div class="paper-head">
-            <div id="new-btn" class="btn">新建学生记录</div>
-        </div>
-        <div class="page-bar">
-            <ul>
-                <li>
-                    <a href="/tcourseplan_info">课程计划</a>
-                </li>
-                <li>
-                    <a href="/student_info">学生信息</a>
-                </li>
-                <li>
-                    <a href="/grademanage_info">成绩管理</a>
-                </li>
-                <li>
-                    <a href="/tea_main">个人主页</a>
-                </li>
-            </ul>
-        </div>
-        <div class="paper-body">
-            <table id="student-table" class="table">
-                <thead>
-                    <tr>
-                        <th class="col-stu_sno">学号</th>
-                        <th class="col-stu_sname">姓名</th>
-                        <th class="col-stu_sgender">性别</th>
-                        <th class="col-stu_age">年龄</th>
-                        <th class="col-stu_enrolled">入学日期</th>
-                        <th class="col-stu_major">专业</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-        <div class="student-editor dialog-background">
-            <form class="dialog">
-                <div class="dialog-head"></div>
-                <div class="dialog-body">
-                    <input type="hidden" name="stu_sn" />
-                    <label>学号: </label>
-                    <input type="text" name="stu_sno" />
-                    <label>性别: </label>
-                    <div class="radio-choices">
-                        <span>
-                            男
-                            <input type="radio" name="stu_sgender" value="m" />
-                        </span>
-                        <span>
-                            女
-                            <input type="radio" name="stu_sgender" value="f" />
-                        </span>
-                    </div>
-                    <label>姓名: </label>
-                    <input type="text" name="stu_sname" />
-                    <label>入学时间: </label>
-                    <input type="text" name="stu_enrolled" />
-                    <label>年龄: </label>
-                    <input type="text" name="stu_sage" />
-                    <label>专业: </label>
-                    <input type="text" name="stu_major" />
-                </div>
-                <div class="dialog-footer">
-                    <a id="save-btn" class="btn">保存</a>
-                    <a id="close-btn" class="btn">关闭</a>
-                </div>
-            </form>
-        </div>
-        <div class="comfirmation-dialog dialog-background">
-            <form class="dialog">
-                <div class="dialog-head"></div>
-                <div class="dialog-body">
-                    <div id="message"></div>
-                </div>
-                <div class="dialog-footer">
-                    <a id="ok-btn" class="btn">确定</a>
-                    <a id="cancel-btn" class="btn">放弃</a>
-                </div>
-            </form>
-        </div>
+    <body>
+        <div class="page-head"></div>
+        <div class="page-body">
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/tcourseplan_info">课程计划</a>
+                    </li>
+                    <li>
+                        <a href="/student_info">学生信息</a>
+                    </li>
+                    <li>
+                        <a href="/grademanage_info">成绩管理</a>
+                    </li>
+                    <li>
+                        <a href="/tea_main">个人主页</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="page-content">
+                
+<div class="paper">
+    <div class="paper-head">
+        <div id="new-btn" class="btn">新建学生记录</div>
     </div>
-    <script src="/student.js"></script>
+    <div class="paper-body">
+        <table id="student-table" class="table">
+            <thead>
+                <tr>
+                    <th class="col-stu_sno">学号</th>
+                    <th class="col-stu_sname">姓名</th>
+                    <th class="col-stu_sgender">性别</th>
+                    <th class="col-stu_age">年龄</th>
+                    <th class="col-stu_enrolled">入学日期</th>
+                    <th class="col-stu_major">专业</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
-    <div class="page-footer">&copy;j-l-l 2020</div>
-</body>
+    <div class="student-editor dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <input type="hidden" name="stu_sn" />
+                <label>学号: </label>
+                <input type="text" name="stu_sno" />
+                <label>性别: </label>
+                <div class="radio-choices">
+                    <span>
+                        男
+                        <input type="radio" name="stu_sgender" value="m" />
+                    </span>
+                    <span>
+                        女
+                        <input type="radio" name="stu_sgender" value="f" />
+                    </span>
+                </div>
+                <label>姓名: </label>
+                <input type="text" name="stu_sname" />
+                <label>入学时间: </label>
+                <input type="text" name="stu_enrolled" />
+                <label>年龄: </label>
+                <input type="text" name="stu_sage" />
+                <label>专业: </label>
+                <input type="text" name="stu_major" />
+            </div>
+            <div class="dialog-footer">
+                <a id="save-btn" class="btn">保存</a>
+                <a id="close-btn" class="btn">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div class="comfirmation-dialog dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <div id="message"></div>
+            </div>
+            <div class="dialog-footer">
+                <a id="ok-btn" class="btn">确定</a>
+                <a id="cancel-btn" class="btn">放弃</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/student.js"></script>
 
+                <div class="paper-footer">&copy;j-l-l 2020</div>
+            </div>
+        </div>
+    </body>
 </html>

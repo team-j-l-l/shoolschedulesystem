@@ -1,11 +1,7 @@
 {% extends "tea_base.html" %}
 
 <!--  -->
-{% block styles %}
-<link href="/main.css" rel="stylesheet" />
-<link href="/tea_main.css" rel="stylesheet" />
-<link href="/components.css" rel="stylesheet" />
-{% endblock %}
+{% block styles %}{% endblock %}
 
 {% block paperheader %}
 <a href="/login">退出登录</a>
@@ -22,9 +18,11 @@
     <br/>
     <li>年龄：{{items.tage}}</li>
     <br/>
-    <a href="/passwordchange/teacher">
-        修改密码
-    </a>
+    <div class="btn">
+        <a href="/passwordchange/student">
+            修改密码
+        </a>
+        </div>
     {% endfor %}
 </ul>
 

@@ -1,7 +1,7 @@
 {% extends "stu_base.html" %}
 
-{% block styles %}{% endblock %}
-
+{% block styles %}
+{% endblock %}
 {% block paperbody %}
 <table id="mycourse-table" class="table">
     <thead>
@@ -14,6 +14,7 @@
             <th class="cou_time">时间</th>
             <th class="cou_week">周次</th>
             <th class="cou_site">地点</th>
+            <th class="action">操作</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +28,6 @@
             <td>{{ item.cou_time }}</td>
             <td>{{ item.cou_week }}</td>
             <td>{{ item.cou_site }}</td>
-        </tr>
         <td>
             <div class="ctrlbar">
                 <div class="btn">
@@ -37,6 +37,7 @@
                 </div>
             </div>
         </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

@@ -1,3 +1,183 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+
+    overflow-y: hidden;
+}
+
+.page-head {
+    width: 100%;
+    height: 4rem;
+    background-color: #009999;
+    box-shadow: 0px 2px 5px 0px #CCFFFF;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+}
+
+.page-body {
+    height: calc(100vh - 4rem);
+    display: flex;
+}
+
+.page-body > .paper-bar {
+    flex: 0 0 12rem;
+    background-color:  #CCFFFF;
+}
+
+.page-body > .page-content {
+    flex: 1 1;
+    background-color: #FFF;
+    position: relative;
+    overflow-y: overlay;
+}
+
+.paper-bar > ul {
+    list-style: none;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    padding-inline-start: unset;
+    padding-top: 1rem;
+    padding-left: 1rem;
+
+    font-size: 2.1rem;
+}
+
+.paper-bar > ul > li {
+    letter-spacing: 0.1em;
+    padding: 0.1em 0.5em;
+
+    user-select: none;
+    position: relative;
+}
+
+.paper-bar > ul > li:hover {
+    background-color: #66CCCC;
+    color: #eee;
+}
+
+.paper-bar > ul > li > a:link,
+.paper-bar > ul > li > a:visited {
+    display: inline-block;
+    width: 100%;
+
+    color: unset;
+    text-decoration: none;
+}
+
+.paper-bar >ul >li > a:link{
+    display: inline-block;
+
+    color: black;
+    text-decoration: none;
+
+    font-size: 20px;
+    font-family: 黑体;
+}
+
+.btn {
+    color: #fff;
+    background-color: #339999;
+    border-color: #009999;
+    width: fit-content;
+    font-weight: bold;
+    padding: 0.2em 1em;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    letter-spacing: 0.1em;
+    user-select: none;
+    cursor: pointer;
+}
+
+.btn > a:visited,
+.btn > a:link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn > form {
+    margin: unset;
+}
+
+.btn > form > input[type="submit"] {
+    background-color: unset;
+    border: unset;
+    color: unset;
+    font-size: unset;
+    padding: unset;
+    appearance: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn > form > input[type="submit"]:focus {
+    outline: none;
+}
+
+.paper {
+    box-shadow: 4px 5px 4px 2px #aaa;
+    padding: 2em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+    background-color: #fff;
+    min-height: 50vh;
+
+    margin: 1em 2em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    animation: fadeInDown; 
+    animation-duration: 0.8s;
+}
+
+.paper > .paper-head {
+    min-height: 2rem;
+}
+
+.paper > .paper-body {
+    flex: 1 1;
+}
+
+table.table {
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    min-width: 5em;
+}
+
+.table tr {
+    line-height: 2;
+}
+
+.table thead > tr:first-child {
+    background-color:  #009999;
+    color: #fff;
+    line-height: 2.5;
+}
+
+.table tr:hover {
+    background-color: #009999;
+}
+
+.table tr:nth-child(odd) {
+    background-color: hsl(306 40% 100%);
+}
+
+.table tr:nth-child(even) {
+    background-color: #CCFFFF;
+}
+
 
 .col-stu_name, .col-stu_no, .col-gender, .col-enrolled {
     min-width: 4em;
@@ -9,18 +189,8 @@ td.col-stu_name, td.col-stu_no, td.col-gender, td.col-enrolled {
     text-align: center;
 }
 
-.table tr{
-    min-width: 4em;
-    width: 8em;
-    text-align: center;
-}
-
 .paper-head {
     margin-bottom: 1em;
-}
-
-.page-bar > ul > li, a:link{
-    text-decoration: none;
 }
 
 .paper-body > table {
@@ -116,7 +286,6 @@ td.ctrlbar .btn {
 }
 
 .dialog-body  input[type="text"] {
-    /* flex: 1 1; */
     font-size: 1.2em;
     padding: 0.2em 0.2em;
 }
@@ -159,4 +328,9 @@ td.ctrlbar .btn {
     font-size: 1.2em;
     color: hsl(0, 94%, 35%);
     letter-spacing: 1px;
+}
+
+.paper-footer{
+    width: 100%;
+    text-align: center;
 }

@@ -1,6 +1,7 @@
 {% extends "stu_base.html" %}
 
-{% block styles %}{% endblock %}
+{% block styles %}
+{% endblock %}
 
 {% block paperheader %}
 <a href="/login">退出登录</a>
@@ -21,9 +22,11 @@
     <br/>
     <li>专业：{{items.major}}</li>
     <br/>
+    <div class="btn">
     <a href="/passwordchange/student">
         修改密码
     </a>
+    </div>
     {% endfor %}
 </ul>
 {% endblock %}
