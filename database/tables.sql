@@ -91,7 +91,6 @@ ALTER TABLE studentcourse
     ADD CONSTRAINT sno_cou_fk FOREIGN KEY (sno_cou) REFERENCES student(sno);
 ALTER TABLE studentcourse
     ADD CONSTRAINT cno_cou_fk FOREIGN KEY (cno_cou) REFERENCES course(cno);
-
 ---- 成绩信息表
 --DROP TABLE IF EXISTS gradetable;
 --CREATE TABLE IF NOT EXISTS gradetable(

@@ -9,7 +9,6 @@ async def edit_courseplan_action(request):
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno, must be required")
     params = await request.post()
-    print(params)
     semester = params.get("semester")
     week = params.get("week")
     time = params.get("time")
@@ -45,7 +44,6 @@ def delete_courseplan_action(request):
 @web_routes.post('/action/tcourseplan/add')
 async def action_courseplan_add(request):
     params = await request.post()
-    print (params)
     cou_cno = params.get("cou_cno")
     semester = params.get("semester")
     week = params.get("week")
@@ -70,7 +68,7 @@ async def action_courseplan_add(request):
     except psycopg2.errors.UniqueViolation:
         query = urlencode({
             "message":"已经添加该课程计划",
-            "return":"/tcourseplan"
+            "return":"/tcourseplan_info"
         })
         return web.HTTPFound(location=f"/error?{query}")
     except psycopg2.errors.ForeignKeyViolation as ex:

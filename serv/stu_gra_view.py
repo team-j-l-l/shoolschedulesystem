@@ -5,7 +5,6 @@ from .login_actions import get_username
 @web_routes.get("/stu_gra_info")
 async def view_stu_gra_info(request):
     username = get_username()
-    print(username)
     with db_block() as db:
         db.execute("""
         SELECT g.sno_cou, g.cno_cou, g.grade, c.cno, c.cname, c.credit,
@@ -17,4 +16,7 @@ async def view_stu_gra_info(request):
         for item in items: 
             if item.sno_cou != username:
                 items.remove(item)
+        for item in items:
+            if item.grade == None:
+                item.grade = "尚未登记"
     return render_html(request,"stu_gra_info.html",items=items)

@@ -36,7 +36,6 @@ def choose_confirm_dialog(request):
         WHERE pla_cno = %(cou_cno)s;
         """,dict(cou_cno=cou_cno))
         record = db.fetch_first()
-        print(record)
     if record is None:
         return web.HTTPNotFound(text=f"no such course：cou_cno={cou_cno}")
     return render_html(request,"stu_coursechoose_confirm.html",record=record)
@@ -45,17 +44,23 @@ def choose_confirm_dialog(request):
 def confirm_courseplan_action(request):
     cou_cno = request.match_info.get("cou_cno")
     semester = request.match_info.get("semester")
-    print(semester)
     site = request.match_info.get("site")
-    print(site)
     week = request.match_info.get("week")
     time = request.match_info.get("time")
     username = get_username()
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno,must be required")
-    with db_block() as db:
-        db.execute("""
-        INSERT INTO studentcourse(sno_cou,cno_cou,semester_cou,week,time,site) 
-        VALUES(%(username)s,%(cou_cno)s,%(semester)s,%(week)s,%(time)s,%(site)s)""",
-        dict(username=username,cou_cno=cou_cno,semester=semester,week=week,time=time,site=site))
+    
+    try:
+        with db_block() as db:
+            db.execute("""
+            INSERT INTO studentcourse(sno_cou,cno_cou,semester_cou,week,time,site) 
+            VALUES(%(username)s,%(cou_cno)s,%(semester)s,%(week)s,%(time)s,%(site)s)""",
+            dict(username=username,cou_cno=cou_cno,semester=semester,week=week,time=time,site=site))
+    except psycopg2.errors.UniqueViolation:
+        query = urlencode({
+            "message":"您已选修过此课程，不能重复选择",
+            "return":"/stu_planchoose"
+        })
+        return web.HTTPFound(location=f"/error?{query}")
     return web.HTTPFound(location="/stu_planchoose")

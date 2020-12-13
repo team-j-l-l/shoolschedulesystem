@@ -22,7 +22,6 @@ async def edit_grade_action(request):
 		return web.HTTPBadRequest(text="stu_sno_gra,cou_cno_gra, must be required")
 	params = await request.post()
 	grade = params.get("grade")
-
 	try:
 		stu_sno_gra = str(stu_sno_gra)
 		cou_cno_gra = str(cou_cno_gra)

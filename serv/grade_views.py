@@ -34,7 +34,6 @@ async def view_list_grade(request):
 @web_routes.get("/grademanage/choose")
 async def view_course_grade(request):
 	cou_cno_gra = get_cou_cno()
-	print(cou_cno_gra)
 	with db_block() as db:
 		db.execute("""
 		SELECT g.sno_cou as stu_sno,
@@ -49,6 +48,9 @@ async def view_course_grade(request):
 		WHERE cno_cou=%(cou_cno_gra)s;
 		""",dict(cou_cno_gra=cou_cno_gra))
 		items = list(db)
+	for item in items:
+		if item.grade == None:
+			item.grade = "尚未登记"
 	with db_block() as db:
 		db.execute('''
 		SELECT sno AS stu_sno, sname AS stu_sname FROM student ORDER BY sname
