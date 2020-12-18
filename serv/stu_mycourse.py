@@ -2,11 +2,11 @@ from aiohttp import web
 import psycopg2.errors
 from urllib.parse import urlencode
 from .config import db_block, web_routes, render_html
-from .login_actions import get_username
+from .login_actions import get_current_user
 
 @web_routes.get("/stu_mycourse")
 async def view_list_courseplan(request):
-    username = get_username()
+    username = get_current_user(request)
     with db_block() as db:
         db.execute("""
         SELECT tc.sno_cou, tc.cno_cou as cou_cno, tc.semester_cou as cou_semester,
@@ -20,7 +20,7 @@ async def view_list_courseplan(request):
 
 @web_routes.get("/action/stu_mycourse/delete/{cou_cno}")
 def delete_confirm_dialog(request):
-    username = get_username()
+    username = get_current_user(request)
     cou_cno = request.match_info.get("cou_cno")
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno must be required")

@@ -1,10 +1,10 @@
 from aiohttp import web
 from .config import db_block, web_routes, render_html
-from .login_actions import get_username
+from .login_actions import get_current_user
 
 @web_routes.get("/stu_gra_info")
 async def view_stu_gra_info(request):
-    username = get_username()
+    username = get_current_user(request)
     with db_block() as db:
         db.execute("""
         SELECT g.sno_cou, g.cno_cou, g.grade, c.cno, c.cname, c.credit,

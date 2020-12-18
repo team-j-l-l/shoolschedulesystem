@@ -1,6 +1,6 @@
 from aiohttp import web
 from .config import db_block, web_routes,render_html
-from .login_actions import get_username
+from .login_actions import get_current_user
 
 @web_routes.get("/")
 async def view_login(request):
@@ -8,7 +8,7 @@ async def view_login(request):
 
 @web_routes.get("/stu_main")
 async def view_stu_main(request):
-	username = get_username()
+	username = get_current_user(request)
 	with db_block() as db:
 		db.execute("""
 		SELECT sno, sname, sgender, sage, enrolled, major FROM student
@@ -19,7 +19,7 @@ async def view_stu_main(request):
 
 @web_routes.get("/tea_main")
 async def view_tea_main(request):
-	username = get_username()
+	username = get_current_user(request)
 	with db_block() as db:
 		db.execute("""
 		SELECT tno, tname, tgender, tage FROM teacher

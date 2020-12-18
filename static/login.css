@@ -21,7 +21,7 @@ body{
     margin: unset;
     margin-top: 200px;
 
-    font-family: 黑体;
+    font-family: 隶书;
     font-size: 35px;
 }
 
@@ -33,6 +33,7 @@ input[type="username"]{
     margin: 10px;
     padding: 3px;
     width: 250px; 
+    font-family: 隶书;
 }
 
 input[type="password"]{
@@ -40,6 +41,7 @@ input[type="password"]{
     margin-left: 45px;
     padding: 3px;
     width: 250px;
+    font-family: 隶书;
 }
 
 .login-type{
@@ -57,7 +59,7 @@ input[type="password"]{
 input[type="submit"]{
     width: 80px;
     height: 35px;
-    font-family: 黑体;
+    font-family: 隶书;
     font-size: 24px;
     margin-left: 200px;
     margin-top: 20px;

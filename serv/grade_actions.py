@@ -44,7 +44,7 @@ def delete_grade_action(request):
 		return web.HTTPBadRequest(text="stu_sno_gra,cou_cno_gra,must be required")
 	with db_block() as db:
 		db.execute("""
-		DELETE FROM studentcourse
-			WHERE sno_cou = %(stu_sno_gra)s AND cno_cou = %(cou_cno_gra)s
-		""",dict(stu_sno_gra=stu_sno_gra,cou_cno_gra=cou_cno_gra))
+		UPDATE studentcourse SET grade = %(grade)s
+		WHERE sno_cou = %(stu_sno_gra)s AND cno_cou = %(cou_cno_gra)s
+		""",dict(stu_sno_gra=stu_sno_gra,cou_cno_gra=cou_cno_gra,grade=None))
 		return web.HTTPFound(location="/grademanage/choose")

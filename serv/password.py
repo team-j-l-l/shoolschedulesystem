@@ -2,7 +2,7 @@ from aiohttp import web
 from .config import db_block, web_routes,render_html
 import psycopg2.errors
 from urllib.parse import urlencode
-from .login_actions import get_username
+from .login_actions import get_current_user
 
 @web_routes.get("/passwordchange/teacher")
 async def view_password_change1(request):
@@ -14,7 +14,7 @@ async def view_password_change2(request):
 
 @web_routes.post("/action/password/change/teacher")
 async def edit_password(request):
-    username = get_username()
+    username = get_current_user(request)
     params = await request.post()
     newpassword = params.get("password")
     with db_block() as db:
@@ -26,7 +26,7 @@ async def edit_password(request):
 
 @web_routes.post("/action/password/change/student")
 async def edit_password(request):
-    username = get_username()
+    username = get_current_user(request)
     params = await request.post()
     newpassword = params.get("password")
     with db_block() as db:

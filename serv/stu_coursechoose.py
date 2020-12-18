@@ -2,7 +2,7 @@ from aiohttp import web
 import psycopg2.errors
 from urllib.parse import urlencode
 from .config import db_block, web_routes, render_html
-from .login_actions import get_username
+from .login_actions import get_current_user
 
 @web_routes.get("/stu_planchoose")
 async def view_list_courseplan(request):
@@ -47,7 +47,8 @@ def confirm_courseplan_action(request):
     site = request.match_info.get("site")
     week = request.match_info.get("week")
     time = request.match_info.get("time")
-    username = get_username()
+    username = get_current_user(request)
+    print(username)
     if cou_cno is None:
         return web.HTTPBadRequest(text="cou_cno,must be required")
     
