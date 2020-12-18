@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <!-- <link rel="stylesheet" href="/bases.css"> -->
+       <link rel="stylesheet" href="/course_info.css">
+        <script>
+            function checkActive(el) {
+                console.log(1111, el.href);
+                return document.location.pathname.startsWith(el.href);
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="page-head"></div>
+        <div class="page-body">
+            <div class="paper-bar">
+                <ul>
+                    <li>
+                        <a href="/course_info">课程管理</a>
+                    </li>
+                    <li>
+                        <a href="/tcourseplan_info">课程计划</a>
+                    </li>
+                    <li>
+                        <a href="/student_info">学生信息</a>
+                    </li>
+                    <li>
+                        <a href="/grademanage_info">成绩管理</a>
+                    </li>
+                    <li>
+                        <a href="/tea_main">个人主页</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="page-content">
+                
+<div class="paper">
+    <div class="paper-head">
+        <div id="new-btn" class="btn">新建课程</div>
+    </div>
+    <div class="paper-body">
+        <table id="course-table" class="table">
+            <thead>
+                <tr>
+                    <th class="col-cou_sno">课程号</th>
+                    <th class="col-cou_cname">课程名</th>
+                    <th class="col-cou_credit">学分</th>
+                    <th class="col-cou_ctype">课程属性</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="course-editor dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <input type="hidden" name="cou_cn"/>
+                <label>课程号: </label>
+                <input type="text" name="cou_cno"/>
+                <label>课程名: </label>
+                <input type="text" name="cou_cname" />
+                <label>学分: </label>
+                <input type="text" name="cou_credit" />
+                <label>课程属性: </label>
+                <input type="text" name="cou_ctype" />
+            </div>
+            <div class="dialog-footer">
+                <a id="save-btn" class="btn">保存</a>
+                <a id="close-btn" class="btn">关闭</a>
+            </div>
+        </form>
+    </div>
+    <div class="comfirmation-dialog dialog-background">
+        <form class="dialog">
+            <div class="dialog-head"></div>
+            <div class="dialog-body">
+                <div id="message"></div>
+            </div>
+            <div class="dialog-footer">
+                <a id="ok-btn" class="btn">确定</a>
+                <a id="cancel-btn" class="btn">放弃</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/course.js"></script>
+
+                <div class="paper-footer">&copy;j-l-l 2020</div>
+            </div>
+        </div>
+    </body>
+</html>

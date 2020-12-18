@@ -15,6 +15,8 @@ import serv.stu_coursechoose
 import serv.stu_mycourse
 import serv.password
 import serv.error_view
+import serv.course_rest
+import serv.course_view
 
 
 
