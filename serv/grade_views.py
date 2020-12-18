@@ -11,7 +11,7 @@ async def view_list_grade(request):
 		''')
 		students = list(db)
 		db.execute("""
-		SELECT cp.pla_cno AS cou_cno, c.cname AS cou_cname, c.credit AS cou_credit
+		SELECT cp.pla_cno AS cou_cno, cp.semester as cou_semester, c.cname AS cou_cname, c.credit AS cou_credit
 		FROM courseplan as cp INNER JOIN course as c ON cp.pla_cno=c.cno ORDER BY pla_cno;
 				""")
 		courses = list(db)
@@ -41,13 +41,15 @@ async def view_course_grade(request):
 			s.sname as stu_sname,
 			c.cname as cou_cname,
 			c.credit as cou_credit,
-			g.grade
+			g.grade, cp.semester as cou_semester
 		FROM studentcourse as g
 			INNER JOIN student as s ON g.sno_cou=s.sno
 			INNER JOIN course as c ON g.cno_cou=c.cno
+			INNER JOIN courseplan as cp ON cp.pla_cno=c.cno 
 		WHERE cno_cou=%(cou_cno_gra)s;
 		""",dict(cou_cno_gra=cou_cno_gra))
 		items = list(db)
+		semes = list(db)
 	for item in items:
 		if item.grade == None:
 			item.grade = "尚未登记"
