@@ -13,6 +13,7 @@ async def login_action(request):
     username = params.get('username')
     password = params.get('password')
     usertype = params.get('logintype')
+    rem = 0
     if username is None or password is None:
         return web.HTTPBadRequest(text="username,password, must be required")
     if usertype == "学生":
@@ -26,6 +27,7 @@ async def login_action(request):
             if username1 == username:
                 password1 = items.scode
                 if password == password1:
+                    rem=1
                     resp = web.HTTPFound("/stu_main")
                     set_secure_cookie(resp,"session_id",str(username))
                     return resp
@@ -41,9 +43,12 @@ async def login_action(request):
             if username2 == username:
                 password2 = items.tcode
                 if password == password2:
+                    rem = 1
                     resp = web.HTTPFound("/tea_main")
                     set_secure_cookie(resp,"session_id",str(username))
                     return resp
+    if rem == 0:
+        return web.HTTPBadRequest(text="用户名或密码错误")
     
 
 def set_secure_cookie(response, name, value, **kwargs):
